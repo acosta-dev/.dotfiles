@@ -26,8 +26,8 @@ bspc rule -a TelegramDesktop state=floating follow=on
 bspc rule -a Pavucontrol     state=floating
 bspc rule -a Pidgin          state=floating
 bspc rule -a Xdm-app          state=floating
+bspc rule -a FSearch          state=floating
 
- 
 #bspc rule -a Gimp desktop='^8' state=floating follow=on
 #bspc rule -a Chromium desktop='^2'
 #bspc rule -a mplayer2 state=floating

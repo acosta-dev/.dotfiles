@@ -20,22 +20,20 @@ line-color = #f00
 border-size = 4
 border-color = #00000000
 
-padding-left = 0
+padding-left = 2
 padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = UbuntuMono:pixelsize=12:antialias=true;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;3
-#font-1 = siji:pixelsize=10;1
-font-2 = FontAwesome:size=10;1
-font-3 = CaskaydiaCoveNerdFont:size=10;1
+font-0 = UbuntuMono:pixelsize=12:antialias=true;3
+font-1 = CaskaydiaCoveNerdFontMono:size=14;3
+font-2 = IosevkaNerdFontMono:size=14;3
 
 
 modules-left = bspwm xwindow
 modules-center = 
-modules-right = wlan cpu memory filesystem xkeyboard pulseaudio date    
+modules-right = datausage wlan cpu memory filesystem xkeyboard pulseaudio date    
 
 tray-position = right
 tray-padding = 2
@@ -114,8 +112,8 @@ label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
 ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
+ws-icon-1 = 2;󰇩
+ws-icon-2 = 3;󰨞
 ws-icon-3 = 4;
 ws-icon-4 = 5;
 ws-icon-5 = 6;
@@ -144,7 +142,7 @@ label-underline = ${colors.sky}
 
 [module/wlan]
 type = internal/network
-interface = wlxe8de2719b4c3
+interface = wlan0
 interval = 3.0
 
 format-connected =  <label-connected>
@@ -185,18 +183,18 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
-date-alt = " %d-%m-%Y"
+date = 
+date-alt = " %d-%m-%Y"
 
-time = %I:%M %p
-time-alt = %I:%M:%S
+time = " %I:%M %p"
+time-alt =  %I:%M:%S
 
-format-prefix = 
+format-prefix = 
 time-foreground = ${colors.mauve}
 time-underline = ${colors.mauve}
 #format-underline = #0a6cf5
 
-label =  %date% %time%
+label =  %date% %time%
 label-foreground = ${colors.mauve}
 label-underline = ${colors.mauve}
 
@@ -211,6 +209,43 @@ label-volume-underline = ${colors.peach}
 
 label-muted = 🔇 muted
 label-muted-foreground = #666
+
+[module/datausage]
+type = custom/script
+; Available tokens:
+;   %counter%
+; Command to be executed (using "/bin/sh -c [command]")
+exec = ~/.config/polybar/scripts/get_vnstat.py
+
+; Conditional command that, if defined, needs to exit successfully
+; before the main exec command is invoked.
+; Default: ""
+#exec-if = pgrep -x myservice
+
+; Set this to true for scripts that continuously produce output
+; If set to 'true', everytime the script produces a new line of output, the module updates.
+; Otherwise, only the first line of output is considered and all later lines are discarded.
+; Default: false
+tail = false
+
+; Seconds to sleep between updates
+; Default: 5 (0 if `tail = true`)
+interval = 300
+
+format =  <label>
+format-foreground = ${colors.flamingo}
+format-underline = ${colors.flamingo}
+; Set environment variables in the 'exec' script
+; New in version 3.6.0
+; env-NAME = VALUE
+; env-FOO = BAR
+
+
+
+
+
+
+
 
 ; Separator in between workspaces
 ; label-separator = |
