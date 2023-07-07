@@ -99,23 +99,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias nexus="~/Apps/nexus/nexus-3.56.0-01/bin/nexus run"
 alias ls="exa --icons"
-alias nexus="/home/orelbi/Apps/Nexus/nexus-3.56.0-01/bin/nexus run"
-
-function proxyon {
-    export http_proxy='http://10.71.29.98:1234'
-    export https_proxy='http://10.71.29.98:1234'
-
-}
-
-function proxyoff {
-    unset http_proxy
-    unset https_proxy
-}
-
-source /home/orelbi/.config/polybar/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source /home/orelbi/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

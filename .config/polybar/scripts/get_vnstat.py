@@ -21,6 +21,6 @@ output = subprocess.run(
 )
 
 output_dict = json.loads(output.stdout)
-dataUsage = convert_size(int(output_dict["interfaces"][0]['traffic']['total']['rx']))
+dataUsage = convert_size(int(output_dict["interfaces"][0]['traffic']['day'][0]['rx']))
 print(dataUsage)
 

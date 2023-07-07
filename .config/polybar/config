@@ -33,7 +33,7 @@ font-2 = IosevkaNerdFontMono:size=14;3
 
 modules-left = bspwm xwindow
 modules-center = 
-modules-right = datausage wlan cpu memory filesystem xkeyboard pulseaudio date    
+modules-right = datausage wlan cpu memory filesystem xkeyboard pulseaudio popup-calendar    
 
 tray-position = right
 tray-padding = 2
@@ -111,11 +111,11 @@ label-empty = %icon%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
-ws-icon-0 = 1;
+ws-icon-0 = 1;
 ws-icon-1 = 2;󰇩
 ws-icon-2 = 3;󰨞
 ws-icon-3 = 4;
-ws-icon-4 = 5;
+ws-icon-4 = 5;󰭻
 ws-icon-5 = 6;
 ws-icon-6 = 7;
 ws-icon-7 = 8;
@@ -126,7 +126,7 @@ ws-icon-default = " "
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.green}
 format-underline = ${colors.green}
 label = %percentage:2%%
@@ -197,6 +197,17 @@ time-underline = ${colors.mauve}
 label =  %date% %time%
 label-foreground = ${colors.mauve}
 label-underline = ${colors.mauve}
+click-right = /home/orelbi/.dotfiles/.config/polybar/scripts/popup-calendar.sh --popup
+
+[module/popup-calendar]
+type = custom/script
+exec = ~/.dotfiles/.config/polybar/scripts/popup-calendar.sh
+interval = 5
+click-left = ~/.dotfiles/.config/polybar/scripts/popup-calendar.sh --popup &
+
+format =  <label>
+format-foreground = ${colors.mauve}
+format-underline = ${colors.mauve}
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -212,37 +223,26 @@ label-muted-foreground = #666
 
 [module/datausage]
 type = custom/script
-; Available tokens:
-;   %counter%
-; Command to be executed (using "/bin/sh -c [command]")
+
 exec = ~/.config/polybar/scripts/get_vnstat.py
-
-; Conditional command that, if defined, needs to exit successfully
-; before the main exec command is invoked.
-; Default: ""
-#exec-if = pgrep -x myservice
-
-; Set this to true for scripts that continuously produce output
-; If set to 'true', everytime the script produces a new line of output, the module updates.
-; Otherwise, only the first line of output is considered and all later lines are discarded.
-; Default: false
 tail = false
-
-; Seconds to sleep between updates
-; Default: 5 (0 if `tail = true`)
 interval = 300
 
 format =  <label>
 format-foreground = ${colors.flamingo}
 format-underline = ${colors.flamingo}
-; Set environment variables in the 'exec' script
-; New in version 3.6.0
-; env-NAME = VALUE
-; env-FOO = BAR
 
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
 
-
-
+[global/wm]
+margin-top = 5
+margin-bottom = 5
 
 
 
@@ -450,16 +450,6 @@ format-underline = ${colors.flamingo}
 ; menu-2-1 = cancel
 ; menu-2-1-exec = menu-open-0
 
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
 
-[global/wm]
-margin-top = 5
-margin-bottom = 5
 
 ; vim:ft=dosini
