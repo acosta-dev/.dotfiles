@@ -17,8 +17,8 @@ bspc config gapless_monocle      true
 bspc config top_padding 30 
 
 ### Windows Rules
-bspc rule -a firefox           desktop ='^2' follow=on
-bspc rule -a Microsoft-edge    desktop ='^3' follow=on
+# bspc rule -a firefox           desktop ='^2' follow=on
+# bspc rule -a Microsoft-edge    desktop ='^3' follow=on
 bspc rule -a Code              desktop ='^3' follow=on
 ### Floating Windows Rules
 bspc rule -a TelegramDesktop state=floating follow=on
@@ -29,5 +29,9 @@ bspc rule -a FSearch         state=floating
 bspc rule -a galculator      state=floating
 bspc rule -a Yad             state=floating
 bspc rule -a smplayer        state=floating
+bspc rule -a Fsearch         state=floating
+bspc rule -a Launcher_creator.py         state=floating
+
+
 
 

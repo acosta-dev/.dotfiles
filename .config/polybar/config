@@ -6,9 +6,9 @@ include-file = ~/.config/polybar/themes/catppuccin_mocha.ini
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 27
-;offset-x = 1%
+;offset-x = 5%
 ;offset-y = 1%
-radius = 6.0
+radius = 9.0
 fixed-center = false
 
 background = ${colors.base}
@@ -31,7 +31,7 @@ font-1 = CaskaydiaCoveNerdFontMono:size=14;3
 font-2 = IosevkaNerdFontMono:size=14;3
 
 
-modules-left = bspwm xwindow
+modules-left = i3 xwindow
 modules-center = 
 modules-right = datausage wlan cpu memory filesystem xkeyboard pulseaudio popup-calendar    
 
@@ -39,10 +39,10 @@ tray-position = right
 tray-padding = 2
 ;tray-background = #0063ff
 
-wm-restack = bspwm
-;wm-restack = i3
+;wm-restack = bspwm
+wm-restack = i3
 
-override-redirect = true
+;override-redirect = true
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -99,6 +99,7 @@ label-focused-underline= ${colors.green}
 label-focused-padding = 2
 
 label-occupied = %icon%
+label-occupied-foreground = ${colors.mauve}
 label-occupied-padding = 2
 
 label-urgent = %icon%
@@ -112,7 +113,7 @@ label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
 ws-icon-0 = 1;
-ws-icon-1 = 2;󰇩
+ws-icon-1 = 2;
 ws-icon-2 = 3;󰨞
 ws-icon-3 = 4;
 ws-icon-4 = 5;󰭻
@@ -145,10 +146,10 @@ type = internal/network
 interface = wlan0
 interval = 3.0
 
-format-connected =  <label-connected>
+format-connected = <label-connected>
 format-connected-foreground = ${colors.text}
 format-connected-underline = ${colors.text}
-label-connected = %essid%
+label-connected = "%{A1:~/.dotfiles/.config/polybar/scripts/popup-calendar.sh --popup &:} %essid%%{A}"
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -232,6 +233,16 @@ format =  <label>
 format-foreground = ${colors.flamingo}
 format-underline = ${colors.flamingo}
 
+; [module/hostWatcher]
+; type = custom/script
+
+; exec = ~/.config/polybar/scripts/host-watcher.sh
+; interval = 300
+
+; format =  <label> 10.0.5.3
+; format-foreground = ${colors.flamingo}
+; format-underline = ${colors.flamingo}
+
 [settings]
 screenchange-reload = true
 ;compositing-background = xor
@@ -250,42 +261,55 @@ margin-bottom = 5
 ; Separator in between workspaces
 ; label-separator = |
 
-; [module/i3]
-; type = internal/i3
-; format = <label-state> <label-mode>
-; index-sort = true
-; wrapping-scroll = false
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
 
-; ; Only show workspaces on the same output as the bar
-; ;pin-workspaces = true
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
 
-; label-mode-padding = 2
-; label-mode-foreground = #000
-; label-mode-background = ${colors.primary}
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
 
-; ; focused = Active workspace on focused monitor
-; label-focused = %index%
-; label-focused-background = ${colors.background-alt}
-; label-focused-underline= ${colors.primary}
-; label-focused-padding = 2
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.green}
+label-focused-padding = 2
 
-; ; unfocused = Inactive workspace on any monitor
-; label-unfocused = %index%
-; label-unfocused-padding = 2
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = 2
 
-; ; visible = Active workspace on unfocused monitor
-; label-visible = %index%
-; label-visible-background = ${self.label-focused-background}
-; label-visible-underline = ${self.label-focused-underline}
-; label-visible-padding = ${self.label-focused-padding}
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
 
-; ; urgent = Workspace with urgency hint set
-; label-urgent = %index%
-; label-urgent-background = ${colors.alert}
-; label-urgent-padding = 2
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
 
-; Separator in between workspaces
-; label-separator = |
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;󰇩
+ws-icon-2 = 3;󰨞
+ws-icon-3 = 4;
+ws-icon-4 = 5;󰭻
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = " "
+
+
+;label-separator = |
 
 
 ; [module/mpd]
