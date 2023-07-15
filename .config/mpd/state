@@ -1,0 +1,42 @@
+sw_volume: 100
+audio_device_state:1:My ALSA Device
+state: pause
+current: 14
+time: 0.000000
+random: 0
+repeat: 0
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0.000000
+mixrampdelay: -1.000000
+playlist_begin
+0:08 Volvería.mp3
+1:07 Ahogándome en tu adiós.mp3
+2:07 Ahogándome en tu adiós.mp3
+3:08 Volvería.mp3
+4:09 Un buen amor.mp3
+5:10 Vívela.mp3
+6:15 La escalera (Acústico).mp3
+7:16 Por fin (Acústico).mp3
+8:17 Quimera.mp3
+9:01 Por fin.mp3
+10:02 La escalera.mp3
+11:06 Recuérdame.mp3
+12:11 Gracias.mp3
+13:Pablo Alborán Variado/00 Pablo Alborán - Quién (Con Alejandro Sanz) [WHITERECORDS].mp3
+14:Pablo Alborán Variado/02 Pablo Alborán - La Escalera [WHITERECORDS].mp3
+15:Pablo Alborán Variado/03 Pablo Alborán - Palmeras En La Nieve [WHITERECORDS].mp3
+16:Pablo Alborán Variado/04 Pablo Alboran - Pasos De Cero [WHITERECORDS].mp3
+17:Pablo Alborán Variado/05 Pablo Alboran - Por Fin [WHITERECORDS].mp3
+18:Pablo Alborán Variado/06 Pablo Alborán - Recuerdame [WHITERECORDS].mp3
+19:Pablo Alborán Variado/07 Pablo Alborán - Cuando Te Alejas [WHITERECORDS].mp3
+20:Pablo Alborán Variado/08 Pablo Alboran - Donde Está El Amor Feat. Jesse _ Joy) [WHITERECORDS].mp3
+21:Pablo Alborán Variado/08 Pablo Alborán - Extasis [WHITERECORDS].mp3
+22:Pablo Alborán Variado/09 Pablo Alboran - El Beso [WHITERECORDS].mp3
+23:Pablo Alborán Variado/10 Ecos [WHITERECORDS].mp3
+24:Pablo Alborán Variado/11 Está Permitido [WHITERECORDS].mp3
+25:Pablo Alborán Variado/12 Ahogándome En Tu Adiós [WHITERECORDS].mp3
+26:Pablo Alborán Variado/13 Volvería [WHITERECORDS].mp3
+27:Pablo Alborán Variado/01 Solamente Tú.mp3
+playlist_end

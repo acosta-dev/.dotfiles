@@ -1,5 +1,10 @@
 import:
-- ~/.config/alacritty/themes/dracula/dracula.yml
+- ~/.config/alacritty/themes/ayu_dark.yaml
+  # pencil_dark.yaml
+
+  #  horizon-dark.yaml
+
+# - ~/.config/alacritty/themes/challenger_deep.yaml
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Import additional configuration files

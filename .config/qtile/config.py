@@ -1,6 +1,6 @@
 import os
 import subprocess
-from libqtile import bar, layout, widget,hook
+from libqtile import bar, layout, widget,hook,qtile
 from libqtile.config import Click, Drag, Group, DropDown, ScratchPad, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -39,6 +39,31 @@ colors = {"base" : "#1e1e2e",
 
 mod = "mod4"
 terminal = guess_terminal()
+
+## Sticky Windows
+def float_to_front(qtile):
+    for window in qtile.currentGroup.windows:
+        if window.floating:
+            window.cmd_bring_to_front()
+
+win_list = []
+def stick_win(qtile):
+    global win_list
+    win_list.append(qtile.current_window)
+def unstick_win(qtile):
+    global win_list
+    if qtile.current_window in win_list:
+        win_list.remove(qtile.current_window)
+@hook.subscribe.setgroup
+def move_win():
+    for w in win_list:
+        w.togroup(qtile.current_group.name)
+
+@hook.subscribe.client_new
+def set_floating(window):
+    if (window.window.get_wm_transient_for()
+            or window.window.get_wm_type() in floating_types):
+        window.floating = True
 
 class GroupLayout(Enum):
     MONADTALL = "monadtall"
@@ -84,9 +109,14 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.spawn("dmenu_run")),
     Key([mod], "space", lazy.spawn("rofi -show drun")),
     Key([mod], "f", lazy.spawn("pcmanfm")),
+    Key([], "Print", lazy.spawn("flameshot gui")),
+    Key([mod], "f3", lazy.spawn("fsearch")),
+    Key([mod], "z", lazy.function(stick_win), desc="make window sticky"),
+    Key([mod, "shift"], "z", lazy.function(unstick_win), desc="unstick window"),
+    Key([mod], "s", lazy.window.toggle_floating()),
 ]
 
 
@@ -120,8 +150,8 @@ groups = [
     ),
     Group(
         name = "2",
-        label = "",
-        layout = "monadtall",
+        label = "󰇩",
+        layout = "monadwide",
     ),
     Group(
         name = "3",
@@ -173,86 +203,6 @@ for i in groups[1:]:
         Key([], 'F12', lazy.group['scratchpad'].dropdown_toggle('telegram')),
     ])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# groups = []
-# group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-# group_labels = ["", "", "󰨞", "", "󰭻", "", "", "", "", ""]
-# group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
-
-# for i in range(len(group_names)):
-#     groups.append(
-#         Group(
-#             name=group_names[i],
-#             layout=group_layouts[i].lower(),
-#             label=group_labels[i],
-#         ))
-#     Group,
-
-# for i in groups:
-#     keys.extend([
-#         Key([mod], i.name, lazy.group[i.name].toscreen()),
-#         Key([mod], "Tab", lazy.screen.next_group()),
-#         Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
-#         Key(["mod1"], "Tab", lazy.screen.next_group()),
-#         Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
-#         Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
-#     ])
-
 def init_layout_theme():
     return {"margin":10,
             "border_width":2,
@@ -296,13 +246,14 @@ screens = [
                                 highlight_method = "line",
                                 highlight_color=['1e1e2e', '1e1e2e']),
                 widget.Prompt(),
-                widget.WindowName(format=" {name}", foreground=colors['green'], fmt = '<b>{}</b>'),
+                widget.WindowName(format=" {name}", max_chars=30, foreground=colors['green'], fmt = '<b>{}</b>'),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
+                widget.Mpd2(status_format='{play_status} {artist}/{title}'),
                 widget.TextBox("", fontsize = 80, foreground=colors['peach'],padding=-16),
                 widget.CPU(format=" {load_percent}% ", fmt = '<b>{}</b>', background=colors['peach'], foreground="#050000"),
                 widget.TextBox("", fontsize = 80, foreground=colors['mauve'],background=colors['peach'],padding=-16),
@@ -362,19 +313,21 @@ def start_once():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
 
-@hook.subscribe.client_new
-def set_floating(window):
-    if (window.window.get_wm_transient_for()
-            or window.window.get_wm_type() in floating_types):
-        window.floating = True
+
 
 floating_types = ["notification", "toolbar", "splash", "dialog"]
 
 floating_layout = layout.Floating(float_rules=[
     *layout.Floating.default_float_rules,
     Match(wm_class='Pidgin'),
+    Match(wm_class='Nm-connection-editor'),
+    Match(wm_class='Psi+'),
+    Match(wm_class='qimgv'),
+    Match(wm_class='Fsearch'),
+    Match(wm_class='Ferdium'),
     Match(wm_class='TelegramDesktop'),
     Match(wm_class='Xdm-app'),
+    Match(wm_class='File-roller'),
     Match(wm_class='confirm'),
     Match(wm_class='dialog'),
     Match(wm_class='download'),
@@ -385,3 +338,6 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='toolbar'),
     Match(wm_class='Galculator'),
 ],  fullscreen_border_width = 0, border_width = 0)
+
+
+
