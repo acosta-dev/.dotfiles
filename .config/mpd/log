@@ -137,3 +137,10 @@ Jul 14 14:48 : exception: Failed to open "My ALSA Device" (alsa); Failed to open
 Jul 14 14:48 : exception: Failed to open "My ALSA Device" (alsa); Failed to open ALSA device "hw:0,0": Device or resource busy
 Jul 14 17:31 : player: played "Pablo Alborán Variado/02 Pablo Alborán - La Escalera [WHITERECORDS].mp3"
 Jul 14 18:25 : mixer: Failed to read mixer for 'My ALSA Device': no such mixer control: PCM
+Jul 15 03:08 : mixer: Failed to read mixer for 'My ALSA Device': no such mixer control: PCM
+Jul 15 18:17 : player: played "Pablo Alborán Variado/02 Pablo Alborán - La Escalera [WHITERECORDS].mp3"
+Jul 15 22:56 : mixer: Failed to read mixer for 'My ALSA Device': no such mixer control: PCM
+Jul 17 09:27 : player: played "Pablo Alborán Variado/02 Pablo Alborán - La Escalera [WHITERECORDS].mp3"
+Jul 17 11:25 : mixer: Failed to read mixer for 'My ALSA Device': no such mixer control: PCM
+Jul 17 11:53 : player: played "Pablo Alborán Variado/02 Pablo Alborán - La Escalera [WHITERECORDS].mp3"
+Jul 17 18:53 : mixer: Failed to read mixer for 'My ALSA Device': no such mixer control: PCM
